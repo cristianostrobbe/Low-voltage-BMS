@@ -1,0 +1,162 @@
+/**
+  ******************************************************************************
+  * @file           : main.h
+  * @brief          : Header for main.c file.
+  *                   This file contains the common defines of the application.
+  ******************************************************************************
+  ** This notice applies to any and all portions of this file
+  * that are not between comment pairs USER CODE BEGIN and
+  * USER CODE END. Other portions of this file, whether 
+  * inserted by the user or by software development tools
+  * are owned by their respective copyright owners.
+  *
+  * COPYRIGHT(c) 2018 STMicroelectronics
+  *
+  * Redistribution and use in source and binary forms, with or without modification,
+  * are permitted provided that the following conditions are met:
+  *   1. Redistributions of source code must retain the above copyright notice,
+  *      this list of conditions and the following disclaimer.
+  *   2. Redistributions in binary form must reproduce the above copyright notice,
+  *      this list of conditions and the following disclaimer in the documentation
+  *      and/or other materials provided with the distribution.
+  *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  *      may be used to endorse or promote products derived from this software
+  *      without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  *
+  ******************************************************************************
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MAIN_H__
+#define __MAIN_H__
+
+/* Includes ------------------------------------------------------------------*/
+
+/* USER CODE BEGIN Includes */
+#include "stm32f4xx_hal.h"
+#include <inttypes.h>
+/* USER CODE END Includes */
+
+/* Private define ------------------------------------------------------------*/
+
+#define EX_GPIO_Pin GPIO_PIN_13
+#define EX_GPIO_GPIO_Port GPIOC
+#define RELAY2_Pin GPIO_PIN_14
+#define RELAY2_GPIO_Port GPIOC
+#define VB2_Pin GPIO_PIN_0
+#define VB2_GPIO_Port GPIOC
+#define VB3_Pin GPIO_PIN_1
+#define VB3_GPIO_Port GPIOC
+#define VB4_Pin GPIO_PIN_2
+#define VB4_GPIO_Port GPIOC
+#define VB1_Pin GPIO_PIN_3
+#define VB1_GPIO_Port GPIOC
+#define TH2_Pin GPIO_PIN_0
+#define TH2_GPIO_Port GPIOA
+#define TH1_Pin GPIO_PIN_1
+#define TH1_GPIO_Port GPIOA
+#define CURR_Pin GPIO_PIN_4
+#define CURR_GPIO_Port GPIOA
+#define LED_Pin GPIO_PIN_5
+#define LED_GPIO_Port GPIOA
+#define RAND_Pin GPIO_PIN_6
+#define RAND_GPIO_Port GPIOA
+#define EXPWM2_Pin GPIO_PIN_7
+#define EXPWM2_GPIO_Port GPIOA
+#define TH3_Pin GPIO_PIN_4
+#define TH3_GPIO_Port GPIOC
+#define TH4_Pin GPIO_PIN_5
+#define TH4_GPIO_Port GPIOC
+#define PCB_LED_Pin GPIO_PIN_0
+#define PCB_LED_GPIO_Port GPIOB
+#define TH5_Pin GPIO_PIN_1
+#define TH5_GPIO_Port GPIOB
+#define SPI_CS_Pin GPIO_PIN_10
+#define SPI_CS_GPIO_Port GPIOB
+#define RELAY_Pin GPIO_PIN_14
+#define RELAY_GPIO_Port GPIOB
+#define PWM1_Pin GPIO_PIN_15
+#define PWM1_GPIO_Port GPIOB
+#define FAN2_Pin GPIO_PIN_6
+#define FAN2_GPIO_Port GPIOC
+#define EXPWM1_Pin GPIO_PIN_7
+#define EXPWM1_GPIO_Port GPIOC
+#define PUMP2_Pin GPIO_PIN_9
+#define PUMP2_GPIO_Port GPIOC
+#define PWM2_Pin GPIO_PIN_9
+#define PWM2_GPIO_Port GPIOA
+#define ERR_LED_Pin GPIO_PIN_10
+#define ERR_LED_GPIO_Port GPIOA
+#define RPMF1_Pin GPIO_PIN_13
+#define RPMF1_GPIO_Port GPIOA
+#define RPMF1_EXTI_IRQn EXTI15_10_IRQn
+#define RPMF2_Pin GPIO_PIN_14
+#define RPMF2_GPIO_Port GPIOA
+#define RPMF2_EXTI_IRQn EXTI15_10_IRQn
+#define PIEZO_Pin GPIO_PIN_15
+#define PIEZO_GPIO_Port GPIOA
+#define SYNC_Pin GPIO_PIN_12
+#define SYNC_GPIO_Port GPIOC
+#define PWM_Daniele_Pin GPIO_PIN_6
+#define PWM_Daniele_GPIO_Port GPIOB
+#define PWM3_Pin GPIO_PIN_7
+#define PWM3_GPIO_Port GPIOB
+#define FAN1_Pin GPIO_PIN_8
+#define FAN1_GPIO_Port GPIOB
+#define PUMP1_Pin GPIO_PIN_9
+#define PUMP1_GPIO_Port GPIOB
+
+/* ########################## Assert Selection ############################## */
+/**
+  * @brief Uncomment the line below to expanse the "assert_param" macro in the 
+  *        HAL drivers code
+  */
+/* #define USE_FULL_ASSERT    1U */
+
+/* USER CODE BEGIN Private defines */
+/* ------- CAN -------*/
+int CAN_Send(int id, uint8_t dataVal[], int size);
+int CAN_Receive(uint8_t *DataRx, int size);
+void canSendMsgReset(void);
+/* ------- ADC -------*/
+void adcConversion(void);
+void getAdcs(void);
+void temperatureCalibration(int *extTemp);
+void currentCalibration(void);
+void printValues(void);
+void printPID(void);
+void printTemp(void);
+void printADC1(void);
+void printVolt(void);
+void printTemperatures(void);
+float avgTemperature(void);
+float maxTemperature(void);
+void RND(void);
+/* ------- PID -------*/
+int max(int num1, int num2);
+/* USER CODE END Private defines */
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+void _Error_Handler(char *, int);
+
+#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __MAIN_H__ */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
